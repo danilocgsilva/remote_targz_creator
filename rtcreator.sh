@@ -14,6 +14,24 @@ cp -r $server_path \$local_files_location
 EOF
 }
 
+move_local_sh_to_server () {
+
+  echo variables:
+  echo temporary_local_shell_file $temporary_local_shell_file
+  echo server_user $server_user
+  echo pem_file $pem_file
+
+  scp $(select_pem_if_any) $temporary_local_shell_file $server_user@$server_address://home/$server_user
+}
+
+## Writes the command selecting the permission file, only if it exists
+select_pem_if_any () {
+  if [ ! -z $pem_file ]
+  then
+    echo -i $pem_file
+  fi
+}
+
 ## Main function
 rtcreator () {
 
@@ -31,7 +49,8 @@ rtcreator () {
 
   generate_local_sh
 
-  echo Script goes here...
+  move_local_sh_to_server
+  
 }
 
 ## detect if being sourced and
