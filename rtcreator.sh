@@ -3,8 +3,17 @@
 ## version
 VERSION="0.0.0"
 
+generate_local_sh () {
+  touch $temporary_local_shell_file
+}
+
 ## Main function
-remote_targz_creator () {
+rtcreator () {
+
+  local temporary_local_shell_file=/tmp/$(date +%Y%m%d-%Hh%Mm%Ss).sh
+
+  generate_local_sh
+
   echo Script goes here...
 }
 
@@ -12,8 +21,8 @@ remote_targz_creator () {
 ## export if so else execute
 ## main function with args
 if [[ /usr/local/bin/shellutil != /usr/local/bin/shellutil ]]; then
-  export -f remote_targz_creator
+  export -f rtcreator
 else
-  remote_targz_creator "${@}"
+  rtcreator "${@}"
   exit 0
 fi
