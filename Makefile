@@ -1,8 +1,8 @@
-BIN ?= remote_targz_creator
+BIN ?= rtcreator
 PREFIX ?= /usr/local
 
 install:
-	cp remote_targz_creator.sh $(PREFIX)/bin/$(BIN)
+	cp rtcreator.sh $(PREFIX)/bin/$(BIN)
 	chmod +x $(PREFIX)/bin/$(BIN)
 
 uninstall:
